@@ -8,17 +8,16 @@ public class DbtrAgt {
 
 	@XmlElement
 	FinInstnId FinInstnId;
-
+        public DbtrAgt(FinInstnId identifinst) {
+		super();
+		this.FinInstnId = identifinst;
+	}
 	public DbtrAgt() {
 		
 	}
 	
-	public DbtrAgt(FinInstnId finInstnId) {
-		super();
-		this.FinInstnId = finInstnId;
-	}
-
-	public FinInstnId getFinInstnId() {
+	/*  on recupere l'identifiant de la banque BIC  */
+	public FinInstnId getIdentifinst() {
 		return FinInstnId;
 	}
 }

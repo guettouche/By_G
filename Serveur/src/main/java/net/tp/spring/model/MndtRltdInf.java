@@ -16,19 +16,22 @@ public class MndtRltdInf {
 	public MndtRltdInf() {
 		
 	}
-	
-	public MndtRltdInf(String mndtId, String dtOfSgntr) {
-		super();
-		MndtId = mndtId;
-		DtOfSgntr = dtOfSgntr;
+        /*on recupere l'identifiant de mandat */
+        public String getIdentMnd() {
+		return MndtId;
 	}
-	
-	public String getDtOfSgntr() {
+        
+        /* les informations relatives au mandat*/
+	public MndtRltdInf(String identMnd, String dateSgntr) {
+		super();
+		MndtId = identMnd;
+		DtOfSgntr = dateSgntr;
+	}
+        /*in recupere la date de la signatue de la transaction */
+	public String getDateSgntr() {
 		return DtOfSgntr;
 	}
 
-	public String getMndtId() {
-		return MndtId;
-	}
+	
 	
 }

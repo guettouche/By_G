@@ -26,54 +26,52 @@ import net.tp.spring.validator.ValidateXML;
 public class SepaController {
 	
 	@Autowired
+	
+	private  SEPAResume resumeSepa;
+	private SEPA sepa;
 	protected ITransactionDAO transactionDAO;
 	
-	private SEPA sepa;
-	
-	private SEPAResume sepaResume;
-	
-	public SepaController(){
+        public SepaController(){
 		sepa = new SEPA();
 		
-		sepaResume = new SEPAResume();
+		resumeSepa = new SEPAResume();
 		
 	}
-	
-	/*Renvoie un flux XML contenant la liste des transactions détaillées*/
-	@RequestMapping(value="/detail", method = RequestMethod.GET)
-	public @ResponseBody SEPA getSEPAInXML() {
-		this.sepa.setTransactions(transactionDAO.list());
-		return this.sepa;
-	}
-	
-	/*Renvoie un flux XML contenant la liste des transactions résumées*/
-	@RequestMapping(value="/resume", method = RequestMethod.GET)
-	public @ResponseBody SEPAResume getSEPAInXMLResume() {
-		this.sepaResume.setTransactions(transactionDAO.listResume());
-		return this.sepaResume;
-	}
-	
-	/*Affiche une synthèse des transactions stockées, avec les informations suivantes :
-	 * Nombre de transactions, montant total des transactions*/
-	@RequestMapping(value="/stats", method = RequestMethod.GET)
-	public @ResponseBody Statistique getSEPAStats() {
-		return transactionDAO.getStats();
-	}
-	
-	/*Renvoie un flux XML décrivant le détail de la transaction d’identifiant id 
-	 * avec id = PmtId */
+           /*on recupere  les details de la transactions avec un identifiant de paiment  id= idenPaim  sous un  flux XML  */
 	@RequestMapping(value="/trx/{id}", method = RequestMethod.GET)
 	public @ResponseBody DrctDbtTxInf getTransactionById(@PathVariable("id") String id) {
 		return transactionDAO.get(id);
 	}
 	
-	/*Reçoit un flux XML décrivant une transaction, 
-	 * crée l'objet correspondant et retourne la valeur PmtId*/
+
+		/* affichage de nombre de transactions et ainsi que le montant total des transactions qui sont sauvegardées  */
+	@RequestMapping(value="/stats", method = RequestMethod.GET)
+	public @ResponseBody Statistique getSEPAStats() {
+		return transactionDAO.getStats();
+	}
+	
+	/*on recupere le nombre on recupere la liste des transactions resumées sous un flux XML*/
+	@RequestMapping(value="/resume", method = RequestMethod.GET)
+	public @ResponseBody SEPAResume getSEPAInXMLResume() {
+		this.resumeSepa.setTransactions(transactionDAO.listResume());
+		return this.resumeSepa;
+	}
+	
+        
+        	/*on recupere la liste des transactions sous un format de flux XML */
+	@RequestMapping(value="/detail", method = RequestMethod.GET)
+	public @ResponseBody SEPA getSEPAInXML() {
+		this.sepa.setTransactions(transactionDAO.list());
+		return this.sepa;
+	}
+        
+        
+	/*Reçoit en entrée une transaction sous format d'un flux XML, afin de créer un objet correspondant a cette transaction, 
+	 * et nous  retourne la valeur idPmtId*/
 	@RequestMapping(value="/depot", method = RequestMethod.POST)
 	public @ResponseBody Response addTransaction(@RequestBody String body) throws SAXException, ParserConfigurationException, IOException {
 		
 		InputSource inputSource = new InputSource(new StringReader(body));
-		//InputSource source ;
 		
 		ValidateXML validator = new ValidateXML();
 		
@@ -97,13 +95,13 @@ public class SepaController {
 				new DbtrAcct(new Id(doc.getElementsByTagName("IBAN").item(0).getTextContent())),
 				doc.getElementsByTagName("RmtInf").item(0).getTextContent());
 		
-				if(transactionDAO.get(drctDbtTxInf.getPmtId())!=null){
+				if(transactionDAO.get(drctDbtTxInf.getIdenPaim())!=null){
 					return new Response("L'identifiant de votre transaction existe déjà.", null, null);
 				}
 				
 				transactionDAO.add(drctDbtTxInf);
 				
-				return new Response(null, "Transaction enregistrée.", drctDbtTxInf.getNum());
+				return new Response(null, "Transaction enregistrée.", drctDbtTxInf.getNumero());
 		}
 		catch(NullPointerException e){
 			return new Response("Fichier XML non valide !", null, null);

@@ -9,16 +9,17 @@ public class Dbtr {
 	@XmlElement
 	String Nm;
 
-	public Dbtr() {
+	
+	public Dbtr(String name) {
+		super();
+		Nm = name;
+	}
+        
+        public Dbtr() {
 		
 	}
-
-	public Dbtr(String nm) {
-		super();
-		Nm = nm;
-	}
-
-	public String getNm() {
+    /*  on recupere le nom de débiteur  */
+	public String getName() {
 		return Nm;
 	}
 	

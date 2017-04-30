@@ -12,6 +12,12 @@ public class SEPAResume {
 	@XmlElement
 	Collection<DrctDbtTxInfResume> Transaction;
 	
+        public void addtTransaction(DrctDbtTxInfResume drctDbtTxInfResume){
+		this.Transaction.add(drctDbtTxInfResume);
+	}
+          public void setTransactions(Collection<DrctDbtTxInfResume> transaction){
+		this.Transaction = transaction;
+	}
 	public SEPAResume() {
 		this.Transaction = new LinkedList<>();
 	}
@@ -20,17 +26,13 @@ public class SEPAResume {
 		super();
 		Transaction = drctDbtTxInfResume;
 	}
-
-	public void addTransaction(DrctDbtTxInfResume drctDbtTxInfResume){
-		this.Transaction.add(drctDbtTxInfResume);
-	}
+      
+        
 
 	public Collection<DrctDbtTxInfResume> getTransaction(){
 		return this.Transaction;
 	}
 	
-	public void setTransactions(Collection<DrctDbtTxInfResume> transaction){
-		this.Transaction = transaction;
-	}
+	
 }
 

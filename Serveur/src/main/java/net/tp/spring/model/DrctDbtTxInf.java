@@ -40,63 +40,66 @@ public class DrctDbtTxInf {
 		
 	}
 
-	public DrctDbtTxInf(int id, String num,String pmtId, double instdAmt, DrctDbtTx drctDbtTx,
-			DbtrAgt dbtrAgt, Dbtr dbtr, DbtrAcct dbtrAcct,
-			String rmtInf) {
+	public DrctDbtTxInf(int identifiant, String numero,String idenPaim, double montInst,DrctDbtTx transDebit,DbtrAgt agentDebit, 
+			Dbtr debiteur, DbtrAcct comptDebit,String infRemise) {
 		super();
-		this.id = id;
-		Num = verifNum(num);
-		PmtId = pmtId;
-		InstdAmt = instdAmt;
-		DrctDbtTx = drctDbtTx;
-		DbtrAgt = dbtrAgt;
-		Dbtr = dbtr;
-		DbtrAcct = dbtrAcct;
-		RmtInf = rmtInf;
+		this.id = identifiant;
+		Num = verifNumero(numero);
+		DbtrAgt = agentDebit;
+		DrctDbtTx = transDebit;
+		InstdAmt = montInst;
+                DbtrAcct = comptDebit;
+                PmtId = idenPaim;
+                RmtInf = infRemise;
+                Dbtr = debiteur;
+		
 	}
-
-	public int getId() {
+        /*on recupere l'identifiant de la transaction*/
+	public int getIdentifiant() {
 		return id;
 	}
-
-	public String getNum() {
+        
+	public String getNumero() {
 		return Num;
 	}
-
-	public String verifNum(String n) {
+        /*on recupere le bic de la banque de  l'agent de debiteur */
+        public DbtrAgt getAgentDebit() {
+		return DbtrAgt;
+	}
+        /* on verifie si le numero est valide*/ 
+	public String verifNumero(String n) {
 		while(n.length()<4){
 			n = "0"+n;
 		}
 		n = "AM"+n;
 		return n;
 	}
-
-	public String getPmtId() {
-		return PmtId;
-	}
-
-	public double getInstdAmt() {
-		return InstdAmt;
-	}
-
-	public DrctDbtTx getDrctDbtTx() {
+        /*on recupere les information su la transction de debit direct*/
+        public DrctDbtTx getTransDebit() {
 		return DrctDbtTx;
 	}
-
-	public DbtrAgt getDbtrAgt() {
-		return DbtrAgt;
+        /*on recupere le montant instruit */
+        public double getMontInst() {
+		return InstdAmt;
 	}
-
-	public Dbtr getDbtr() {
+        /*on recupere le compte debiteur */
+        public DbtrAcct getComptDebit() {
+		return DbtrAcct;
+	}
+        /*on recupere l'identification de paiment */
+	public String getIdenPaim() {
+		return PmtId;
+	}
+        /*on recupere les informations sur les remises*/
+	public String getInfRemise() {
+		return RmtInf;
+	}
+	
+	/*on recupere le nom de debiteur*/
+        public Dbtr getDebiteur() {
 		return Dbtr;
 	}
 
-	public DbtrAcct getDbtrAcct() {
-		return DbtrAcct;
-	}
-
-	public String getRmtInf() {
-		return RmtInf;
-	}
+	
 	
 }

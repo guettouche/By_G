@@ -22,16 +22,22 @@ public class ValidateXML {
 		
 	}
 	
-	//Retourne 1 si le fichier XML est valide, 0 sinon
-	public int validate_XML(String fichierXSD, InputSource FichierXML) throws SAXException, ParserConfigurationException, IOException{
+	/*cette methode nous renvoie  1 si le fichier XML introduit est valide sinon 0 */
+        
+	public int validate_XML(String fileXSD, InputSource fileXML) throws SAXException, ParserConfigurationException, IOException{
 		try{
+                    //  Récupère une "factory" pour le XML Schema du W3C
 			SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 			
-			InputStream is = this.getClass().getResourceAsStream(fichierXSD);
-		    
-			Schema schema = factory.newSchema((Source) new InputStreamReader(is));
-			Validator validator = (Validator) schema.newValidator();
-			validator.validate((Source) FichierXML);
+			InputStream is = this.getClass().getResourceAsStream(fileXSD);
+		       
+                        Schema schema = factory.newSchema((Source) new InputStreamReader(is));
+			
+                        //Récupère un validateur depuis le schéma
+                        
+                        Validator validator = (Validator) schema.newValidator();
+			
+                        validator.validate((Source) fileXML);
 			return 1;
 		}
 		catch(IOException | SAXException e){

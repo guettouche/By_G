@@ -9,16 +9,20 @@ public class DbtrAcct {
 	@XmlElement
 	Id Id;
 
+        
+        
+	public DbtrAcct(Id identifiant) {
+		super();
+		Id = identifiant;
+	}
+        
+        
 	public DbtrAcct() {
 		
 	}
 
-	public DbtrAcct(Id id) {
-		super();
-		Id = id;
-	}
-
-	public Id getId() {
+   /*  on recupere l'identifiant de compte débiteur  */
+	public Id getIdentifiant() {
 		return Id;
 	}
 }

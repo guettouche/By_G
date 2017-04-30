@@ -37,11 +37,11 @@ public class TransactionDAO implements ITransactionDAO{
 		String sql = "INSERT INTO transaction (num, PmtId, InstdAmt, MndtId, DtOfSgntr, "
 				+ "BIC, Nm, IBAN, RmtInf) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
-		jdbcTemplate.update(sql, DrctDbtTxInf.getNum(), DrctDbtTxInf.getPmtId(), DrctDbtTxInf.getInstdAmt(), 
-				DrctDbtTxInf.getDrctDbtTx().getMndtRltdInf().getMndtId(), 
-				DrctDbtTxInf.getDrctDbtTx().getMndtRltdInf().getDtOfSgntr()
-				, DrctDbtTxInf.getDbtrAgt().getFinInstnId().getBIC(), DrctDbtTxInf.getDbtr().getNm(), 
-				DrctDbtTxInf.getDbtrAcct().getId().getIBAN(), DrctDbtTxInf.getRmtInf());
+		jdbcTemplate.update(sql, DrctDbtTxInf.getNumero(), DrctDbtTxInf.getIdenPaim(), DrctDbtTxInf.getMontInst(), 
+				DrctDbtTxInf.getTransDebit().getInformMandat().getIdentMnd(), 
+				DrctDbtTxInf.getTransDebit().getInformMandat().getDateSgntr()
+				, DrctDbtTxInf.getAgentDebit().getIdentifinst().getBIC(), DrctDbtTxInf.getDebiteur().getName(), 
+				DrctDbtTxInf.getComptDebit().getIdentifiant().getIBAN(), DrctDbtTxInf.getInfRemise());
 	}
 
 	/*Rechercher une transaction identifiée par pmtId dans la base de données*/

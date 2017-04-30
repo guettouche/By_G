@@ -9,16 +9,20 @@ public class DrctDbtTx{
 	@XmlElement
 	MndtRltdInf MndtRltdInf;
 	
+        
+        public DrctDbtTx(MndtRltdInf informMandat) {
+		super();
+		this.MndtRltdInf = informMandat;
+	}
+
 	public DrctDbtTx(){
 		
 	}
 	
-	public DrctDbtTx(MndtRltdInf mndtRltdInf) {
-		super();
-		this.MndtRltdInf = mndtRltdInf;
-	}
-
-	public MndtRltdInf getMndtRltdInf() {
+        
+        /*  on recupere les informations relative au Mandat */
+	
+	public MndtRltdInf getInformMandat() {
 		return MndtRltdInf;
 	}
 }

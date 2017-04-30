@@ -28,59 +28,7 @@ public class TransactionController {
 
 
 	
-	@RequestMapping(value="/detail", method = RequestMethod.GET)
-	public ModelAndView transactionDetails(ModelAndView model) throws IOException, SAXException, ParserConfigurationException{
-        
-		model.addObject("listTransactions", getRequest("https://sepabank.herokuapp.com/detail"));
-		model.setViewName("transactionDetail");
-		
-		return model;
-	}
-	
-	@RequestMapping(value="/resume", method = RequestMethod.GET)
-	public ModelAndView transactionResume(ModelAndView model) throws IOException, SAXException, ParserConfigurationException{
-        
-		model.addObject("listTransactions", getRequest("https://sepabank.herokuapp.com/resume"));
-		model.setViewName("transactionResume");
-		
-		return model;
-	}
-	
-	@RequestMapping(value="/stats", method = RequestMethod.GET)
-	public ModelAndView transactionStats(ModelAndView model) throws IOException, SAXException, ParserConfigurationException{
-        
-		model.addObject("statistiques", getRequest("https://sepabank.herokuapp.com/stats"));
-		model.setViewName("transactionStats");
-		
-		return model;
-	}
-	
-	@RequestMapping(value="/search", method = RequestMethod.GET)
-	public ModelAndView searchTransaction( ModelAndView model){
-		
-		model.setViewName("searchTransaction");
-		
-		return model;
-	}
-	
-	@RequestMapping(value="/getsearch", method = RequestMethod.GET)
-	public ModelAndView searchTransaction(HttpServletRequest request, ModelAndView model) throws IOException, SAXException, ParserConfigurationException{
-		String id = new String(request.getParameter("identifiant"));
-		
-		Document d = getRequest("https://sepabank.herokuapp.com/trx/"+id.replace(" ", "%20"));
-		
-		if(d!=null){
-			model.addObject("transaction",d);
-		}else{
-			model.addObject("error","Cet identifiant n'existe pas");
-		}
-		
-		
-		model.setViewName("searchTransaction");
-		
-		return model;
-	}
-	
+           
 	@RequestMapping(value="/depot", method = RequestMethod.GET)
 	public ModelAndView depotTransaction(ModelAndView model) throws IOException{
 		
@@ -89,7 +37,41 @@ public class TransactionController {
 		return model;
 	}
 	
-	@RequestMapping(value="/addtrx", method = RequestMethod.POST)
+        	
+	@RequestMapping(value = "/addXmlFile", method = RequestMethod.POST)
+	public ModelAndView uploadFileHandler(@RequestParam("file") MultipartFile file, ModelAndView model) {
+		try {
+			byte[] bytes = file.getBytes();
+			String trx = new String(bytes, StandardCharsets.UTF_8);
+			
+			Document d = postRequest("https://sepabank.herokuapp.com/depot/", trx);
+			if(d!=null){
+				model.addObject("response", d);
+			}else{
+				model.addObject("error","Valeurs non valides");
+			}
+				
+		} catch (Exception e) {
+			model.addObject("error", "You failed to upload  => " + e.getMessage());
+		}
+		
+		model.setViewName("depotTransaction");
+		
+		return model;
+	}
+	
+
+	@RequestMapping(value="/search", method = RequestMethod.GET)
+	public ModelAndView searchTransaction( ModelAndView model){
+		
+		model.setViewName("searchTransaction");
+		
+		return model;
+	}
+	
+
+            
+        @RequestMapping(value="/addtrx", method = RequestMethod.POST)
 	public ModelAndView addTransaction(HttpServletRequest request, ModelAndView model) throws IOException, SAXException, ParserConfigurationException{
 		String trx = new String("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
 								+"<DrctDbtTxInf>"+
@@ -128,51 +110,57 @@ public class TransactionController {
 		
 		return model;
 	}
-	
-	@RequestMapping(value = "/addXmlFile", method = RequestMethod.POST)
-	public ModelAndView uploadFileHandler(@RequestParam("file") MultipartFile file, ModelAndView model) {
-		try {
-			byte[] bytes = file.getBytes();
-			String trx = new String(bytes, StandardCharsets.UTF_8);
-			
-			Document d = postRequest("https://sepabank.herokuapp.com/depot/", trx);
-			if(d!=null){
-				model.addObject("response", d);
-			}else{
-				model.addObject("error","Valeurs non valides");
-			}
-				
-		} catch (Exception e) {
-			model.addObject("error", "You failed to upload  => " + e.getMessage());
+            
+           
+        
+	@RequestMapping(value="/resume", method = RequestMethod.GET)
+	public ModelAndView transactionResume(ModelAndView model) throws IOException, SAXException, ParserConfigurationException{
+        
+		model.addObject("listTransactions", getRequest("https://sepabank.herokuapp.com/resume"));
+		model.setViewName("transactionResume");
+		
+		return model;
+	}
+
+            
+	@RequestMapping(value="/getsearch", method = RequestMethod.GET)
+	public ModelAndView searchTransaction(HttpServletRequest request, ModelAndView model) throws IOException, SAXException, ParserConfigurationException{
+		String id = new String(request.getParameter("identifiant"));
+		
+		Document d = getRequest("https://sepabank.herokuapp.com/trx/"+id.replace(" ", "%20"));
+		
+		if(d!=null){
+			model.addObject("transaction",d);
+		}else{
+			model.addObject("error","Cet identifiant n'existe pas");
 		}
 		
-		model.setViewName("depotTransaction");
+		
+		model.setViewName("searchTransaction");
 		
 		return model;
 	}
 	
-	public Document getRequest(String url) throws IOException, SAXException, ParserConfigurationException{
-		URL obj = new URL(url);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-		con.setRequestMethod("GET");
-
-		BufferedReader in = new BufferedReader(
-		        new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
-
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
-		}
-		in.close();
-
-		if(response.toString().contains("<?xml version=\"1.0\"")){
-	        return (Document) DocumentBuilderFactory.newInstance().newDocumentBuilder()
-		            .parse(new InputSource(new StringReader(response.toString())));
-		}
-		return null;
+            
+	@RequestMapping(value="/stats", method = RequestMethod.GET)
+	public ModelAndView transactionStats(ModelAndView model) throws IOException, SAXException, ParserConfigurationException{
+        
+		model.addObject("statistiques", getRequest("https://sepabank.herokuapp.com/stats"));
+		model.setViewName("transactionStats");
+		
+		return model;
 	}
+	
+        @RequestMapping(value="/detail", method = RequestMethod.GET)
+	public ModelAndView transactionDetails(ModelAndView model) throws IOException, SAXException, ParserConfigurationException{
+        
+		model.addObject("listTransactions", getRequest("https://sepabank.herokuapp.com/detail"));
+		model.setViewName("transactionDetail");
+		
+		return model;
+	}
+	
+	
 	
 	public Document postRequest(String url, String xml) throws SAXException, ParserConfigurationException{
 		try{
@@ -202,5 +190,28 @@ public class TransactionController {
 		}catch(IOException e){
 			return null;
 		}
+	}
+        
+        public Document getRequest(String url) throws IOException, SAXException, ParserConfigurationException{
+		URL obj = new URL(url);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+		con.setRequestMethod("GET");
+
+		BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+
+		if(response.toString().contains("<?xml version=\"1.0\"")){
+	        return (Document) DocumentBuilderFactory.newInstance().newDocumentBuilder()
+		            .parse(new InputSource(new StringReader(response.toString())));
+		}
+		return null;
 	}
 }

@@ -38,7 +38,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 		DriverManagerDataSource DMDS = new DriverManagerDataSource();
 		DMDS.setDriverClassName("com.mysql.jdbc.Driver");
 		DMDS.setUrl("jdbc:mysql://localhost:3306/sepa_by_gi");
-		DMDS.setUsername("root");
+		
                 
 		
 		

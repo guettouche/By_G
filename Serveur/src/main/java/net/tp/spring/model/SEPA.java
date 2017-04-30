@@ -12,25 +12,26 @@ public class SEPA {
 	@XmlElement
 	Collection<DrctDbtTxInf> DrctDbtTxInf;
 	
-	public SEPA() {
-		this.DrctDbtTxInf = new LinkedList<>();
+	
+        public void addTransaction(DrctDbtTxInf drctDbtTxInf){
+		this.DrctDbtTxInf.add(drctDbtTxInf);
 	}
-
 	public SEPA(Collection<DrctDbtTxInf> drctDbtTxInf) {
 		super();
 		DrctDbtTxInf = drctDbtTxInf;
 	}
 
-	public void addTransaction(DrctDbtTxInf drctDbtTxInf){
-		this.DrctDbtTxInf.add(drctDbtTxInf);
+	public void setTransactions(Collection<DrctDbtTxInf> transaction){
+		this.DrctDbtTxInf = transaction;
 	}
 
 	public Collection<DrctDbtTxInf> getTransaction(){
 		return this.DrctDbtTxInf;
 	}
 	
-	public void setTransactions(Collection<DrctDbtTxInf> transaction){
-		this.DrctDbtTxInf = transaction;
+	
+        public SEPA() {
+		this.DrctDbtTxInf = new LinkedList<>();
 	}
 }
 

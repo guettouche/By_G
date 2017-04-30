@@ -9,14 +9,16 @@ public class FinInstnId {
 	@XmlElement
 	String BIC;
 	
-	public FinInstnId() {
-		
-	}
-
-	public FinInstnId(String bic) {
+        public FinInstnId(String bic) {
 		super();
 		this.BIC = bic;
 	}
+	
+        public FinInstnId() {
+		
+	}
+
+	
 
 	public String getBIC() {
 		return BIC;
