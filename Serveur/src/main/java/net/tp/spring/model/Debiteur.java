@@ -4,18 +4,18 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Dbtr")
-public class Dbtr {
+public class Debiteur {
 
 	@XmlElement
 	String Nm;
 
 	
-	public Dbtr(String name) {
+	public Debiteur(String name) {
 		super();
 		Nm = name;
 	}
         
-        public Dbtr() {
+        public Debiteur() {
 		
 	}
     /*  on recupere le nom de débiteur  */

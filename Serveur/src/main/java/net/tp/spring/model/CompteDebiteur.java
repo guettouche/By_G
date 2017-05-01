@@ -4,20 +4,20 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "DbtrAcct")
-public class DbtrAcct {
+public class CompteDebiteur {
 
 	@XmlElement
 	Id Id;
 
         
         
-	public DbtrAcct(Id identifiant) {
+	public CompteDebiteur(Id identifiant) {
 		super();
 		Id = identifiant;
 	}
         
         
-	public DbtrAcct() {
+	public CompteDebiteur() {
 		
 	}
 

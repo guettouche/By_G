@@ -8,18 +8,15 @@ public class Id {
 
 	@XmlElement
 	String IBAN;
-        
-        public Id(String iBAN) {
-		super();
-		IBAN = iBAN;
-	}
-        
-        
+
 	public Id() {
 		
 	}
 
-	
+	public Id(String iBAN) {
+		super();
+		IBAN = iBAN;
+	}
 
 	public String getIBAN() {
 		return IBAN;

@@ -16,11 +16,10 @@ public class Statistique {
 		
 	}
 
-	public Statistique(int nbrTransactions, double total) {
+	public Statistique(int nombreTransactions, double montantTotal) {
 		super();
-		MontantTotal = total;
-                NombreTransactions = nbrTransactions;
-        }
-        
+		NombreTransactions = nombreTransactions;
+		MontantTotal = montantTotal;
+	}
 	
 }

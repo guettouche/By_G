@@ -69,7 +69,8 @@
                         <a href="trx/id">Trx+Id</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="depot">depot</a>
+                        <a href="https://servicerestclientbyguetfinalv.herokuapp.com/" 
+                           onclick="window.open(this.href); return false;">Partie Client</a>
                     </li>
                 </ul>
             </div>

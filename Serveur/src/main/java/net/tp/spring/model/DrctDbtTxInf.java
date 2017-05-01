@@ -22,16 +22,16 @@ public class DrctDbtTxInf {
 	double InstdAmt;
 	
 	@XmlElement
-	DrctDbtTx DrctDbtTx;
+	DirectDebitTransaction DrctDbtTx;
 	
 	@XmlElement
-	DbtrAgt DbtrAgt;
+	DebtorAgent DbtrAgt;
 	
 	@XmlElement
-	Dbtr Dbtr;
+	Debiteur Dbtr;
 	
 	@XmlElement
-	DbtrAcct DbtrAcct;
+	CompteDebiteur DbtrAcct;
 	
 	@XmlElement
 	String RmtInf;
@@ -40,8 +40,8 @@ public class DrctDbtTxInf {
 		
 	}
 
-	public DrctDbtTxInf(int identifiant, String numero,String idenPaim, double montInst,DrctDbtTx transDebit,DbtrAgt agentDebit, 
-			Dbtr debiteur, DbtrAcct comptDebit,String infRemise) {
+	public DrctDbtTxInf(int identifiant, String numero,String idenPaim, double montInst,DirectDebitTransaction transDebit,DebtorAgent agentDebit, 
+			Debiteur debiteur, CompteDebiteur comptDebit,String infRemise) {
 		super();
 		this.id = identifiant;
 		Num = verifNumero(numero);
@@ -63,7 +63,7 @@ public class DrctDbtTxInf {
 		return Num;
 	}
         /*on recupere le bic de la banque de  l'agent de debiteur */
-        public DbtrAgt getAgentDebit() {
+        public DebtorAgent getAgentDebit() {
 		return DbtrAgt;
 	}
         /* on verifie si le numero est valide*/ 
@@ -75,7 +75,7 @@ public class DrctDbtTxInf {
 		return n;
 	}
         /*on recupere les information su la transction de debit direct*/
-        public DrctDbtTx getTransDebit() {
+        public DirectDebitTransaction getTransDebit() {
 		return DrctDbtTx;
 	}
         /*on recupere le montant instruit */
@@ -83,7 +83,7 @@ public class DrctDbtTxInf {
 		return InstdAmt;
 	}
         /*on recupere le compte debiteur */
-        public DbtrAcct getComptDebit() {
+        public CompteDebiteur getComptDebit() {
 		return DbtrAcct;
 	}
         /*on recupere l'identification de paiment */
@@ -96,7 +96,7 @@ public class DrctDbtTxInf {
 	}
 	
 	/*on recupere le nom de debiteur*/
-        public Dbtr getDebiteur() {
+        public Debiteur getDebiteur() {
 		return Dbtr;
 	}
 

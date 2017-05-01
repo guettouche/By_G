@@ -4,25 +4,25 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "DrctDbtTx")
-public class DrctDbtTx{
+public class DirectDebitTransaction{
 
 	@XmlElement
-	MndtRltdInf MndtRltdInf;
+	MandateRelatedInformation MndtRltdInf;
 	
         
-        public DrctDbtTx(MndtRltdInf informMandat) {
+        public DirectDebitTransaction(MandateRelatedInformation informMandat) {
 		super();
 		this.MndtRltdInf = informMandat;
 	}
 
-	public DrctDbtTx(){
+	public DirectDebitTransaction(){
 		
 	}
 	
         
         /*  on recupere les informations relative au Mandat */
 	
-	public MndtRltdInf getInformMandat() {
+	public MandateRelatedInformation getInformMandat() {
 		return MndtRltdInf;
 	}
 }

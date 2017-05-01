@@ -20,29 +20,30 @@ import net.tp.spring.dao.TransactionDAO;
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
+	
+	
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry RHR) {
+		RHR.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
+
 	@Bean
+	public DataSource getDataSource() {
+		DriverManagerDataSource DMD = new DriverManagerDataSource();
+		DMD.setDriverClassName("com.mysql.jdbc.Driver");
+		DMD.setUrl("jdbc:mysql://localhost:3306/sepa_by_gi");
+		DMD.setUsername("root");
+		DMD.setPassword("");
+		
+		return DMD;
+	}
+        
+        @Bean
 	public ViewResolver getViewResolver(){
 		InternalResourceViewResolver IRVR = new InternalResourceViewResolver();
 		IRVR.setPrefix("/WEB-INF/views/");
 		IRVR.setSuffix(".jsp");
 		return IRVR;
-	}
-	
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	}
-
-	@Bean
-	public DataSource getDataSource() {
-		DriverManagerDataSource DMDS = new DriverManagerDataSource();
-		DMDS.setDriverClassName("com.mysql.jdbc.Driver");
-		DMDS.setUrl("jdbc:mysql://localhost:3306/sepa_by_gi");
-		
-                
-		
-		
-		return DMDS;
 	}
 	
 	@Bean

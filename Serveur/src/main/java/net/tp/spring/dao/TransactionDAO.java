@@ -11,15 +11,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
-import net.tp.spring.model.Dbtr;
-import net.tp.spring.model.DbtrAcct;
-import net.tp.spring.model.DbtrAgt;
-import net.tp.spring.model.DrctDbtTx;
+import net.tp.spring.model.Debiteur;
+import net.tp.spring.model.CompteDebiteur;
+import net.tp.spring.model.DebtorAgent;
+import net.tp.spring.model.DirectDebitTransaction;
 import net.tp.spring.model.DrctDbtTxInf;
 import net.tp.spring.model.DrctDbtTxInfResume;
-import net.tp.spring.model.FinInstnId;
+import net.tp.spring.model.FinalInstitutionIdentifier;
 import net.tp.spring.model.Id;
-import net.tp.spring.model.MndtRltdInf;
+import net.tp.spring.model.MandateRelatedInformation;
 import net.tp.spring.model.Statistique;
 
 public class TransactionDAO implements ITransactionDAO{
@@ -55,9 +55,9 @@ public class TransactionDAO implements ITransactionDAO{
 				if (rs.next()) {
 					return new DrctDbtTxInf(rs.getInt("transaction_id"),
 							rs.getString("num"),rs.getString("PmtId"),rs.getDouble("InstdAmt"), 
-							new DrctDbtTx((new MndtRltdInf(rs.getString("MndtId"),rs.getString("DtOfSgntr")))),
-							new DbtrAgt(new FinInstnId(rs.getString("BIC"))),new Dbtr(rs.getString("Nm")), 
-							new DbtrAcct(new Id(rs.getString("IBAN"))),rs.getString("RmtInf"));
+							new DirectDebitTransaction((new MandateRelatedInformation(rs.getString("MndtId"),rs.getString("DtOfSgntr")))),
+							new DebtorAgent(new FinalInstitutionIdentifier(rs.getString("BIC"))),new Debiteur(rs.getString("Nm")), 
+							new CompteDebiteur(new Id(rs.getString("IBAN"))),rs.getString("RmtInf"));
 				}
 				
 				return null;
@@ -81,9 +81,9 @@ public class TransactionDAO implements ITransactionDAO{
 			public DrctDbtTxInf mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return new DrctDbtTxInf(rs.getInt("transaction_id"),
 						rs.getString("num"),rs.getString("PmtId"),rs.getDouble("InstdAmt"), 
-						new DrctDbtTx((new MndtRltdInf(rs.getString("MndtId"),rs.getString("DtOfSgntr")))),
-						new DbtrAgt(new FinInstnId(rs.getString("BIC"))),new Dbtr(rs.getString("Nm")), 
-						new DbtrAcct(new Id(rs.getString("IBAN"))),rs.getString("RmtInf"));
+						new DirectDebitTransaction((new MandateRelatedInformation(rs.getString("MndtId"),rs.getString("DtOfSgntr")))),
+						new DebtorAgent(new FinalInstitutionIdentifier(rs.getString("BIC"))),new Debiteur(rs.getString("Nm")), 
+						new CompteDebiteur(new Id(rs.getString("IBAN"))),rs.getString("RmtInf"));
 				
 			}
 			

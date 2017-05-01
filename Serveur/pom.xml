@@ -7,7 +7,7 @@
 	<version>1.0</version>
 	<packaging>war</packaging>
 
-	<name>SEPA</name>
+	<name>SepaByGuettouche</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -78,7 +78,12 @@
 		    <artifactId>spring-oxm</artifactId>
 		    <version>3.0.0.RELEASE</version>
 		</dependency>
-
+	 <dependency>
+	  <groupId>org.springframework</groupId>
+	  <artifactId>spring-beans</artifactId>
+	  <version>4.3.7.RELEASE</version>
+	  <type>jar</type>
+	 </dependency>
 	</dependencies>
 
 	<build>

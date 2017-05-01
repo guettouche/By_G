@@ -4,20 +4,20 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "DbtrAgt")
-public class DbtrAgt {
+public class DebtorAgent  {
 
 	@XmlElement
-	FinInstnId FinInstnId;
-        public DbtrAgt(FinInstnId identifinst) {
+	FinalInstitutionIdentifier FinInstnId;
+        public DebtorAgent(FinalInstitutionIdentifier identifinst) {
 		super();
 		this.FinInstnId = identifinst;
 	}
-	public DbtrAgt() {
+	public DebtorAgent() {
 		
 	}
 	
 	/*  on recupere l'identifiant de la banque BIC  */
-	public FinInstnId getIdentifinst() {
+	public FinalInstitutionIdentifier getIdentifinst() {
 		return FinInstnId;
 	}
 }

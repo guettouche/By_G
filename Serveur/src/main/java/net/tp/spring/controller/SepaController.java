@@ -9,7 +9,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,19 +20,20 @@ import org.w3c.dom.Document;
 import net.tp.spring.dao.ITransactionDAO;
 import net.tp.spring.model.*;
 import net.tp.spring.validator.ValidateXML;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
 public class SepaController {
 	
 	@Autowired
-	
-	private  SEPAResume resumeSepa;
-	private SEPA sepa;
 	protected ITransactionDAO transactionDAO;
 	
-        public SepaController(){
+	private final SEPA sepa;
+	
+	private final SEPAResume resumeSepa;
+	
+	public SepaController(){
 		sepa = new SEPA();
-		
 		resumeSepa = new SEPAResume();
 		
 	}
@@ -88,11 +88,11 @@ public class SepaController {
 			DrctDbtTxInf drctDbtTxInf = new DrctDbtTxInf(id,Integer.toString(id),
 				doc.getElementsByTagName("PmtId").item(0).getTextContent(),
 				Double.parseDouble(doc.getElementsByTagName("InstdAmt").item(0).getTextContent()), 
-				new DrctDbtTx((new MndtRltdInf(doc.getElementsByTagName("MndtId").item(0).getTextContent(),
+				new DirectDebitTransaction((new MandateRelatedInformation(doc.getElementsByTagName("MndtId").item(0).getTextContent(),
 						doc.getElementsByTagName("DtOfSgntr").item(0).getTextContent()))),
-				new DbtrAgt(new FinInstnId(doc.getElementsByTagName("BIC").item(0).getTextContent())),
-				new Dbtr(doc.getElementsByTagName("Nm").item(0).getTextContent()), 
-				new DbtrAcct(new Id(doc.getElementsByTagName("IBAN").item(0).getTextContent())),
+				new DebtorAgent(new FinalInstitutionIdentifier(doc.getElementsByTagName("BIC").item(0).getTextContent())),
+				new Debiteur(doc.getElementsByTagName("Nm").item(0).getTextContent()), 
+				new CompteDebiteur(new Id(doc.getElementsByTagName("IBAN").item(0).getTextContent())),
 				doc.getElementsByTagName("RmtInf").item(0).getTextContent());
 		
 				if(transactionDAO.get(drctDbtTxInf.getIdenPaim())!=null){

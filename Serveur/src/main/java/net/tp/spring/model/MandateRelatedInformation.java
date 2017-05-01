@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MndtRltdInf")
-public class MndtRltdInf {
+public class MandateRelatedInformation {
 	
 	@XmlElement
 	String MndtId;
@@ -13,7 +13,7 @@ public class MndtRltdInf {
 	@XmlElement
 	String DtOfSgntr;
 
-	public MndtRltdInf() {
+	public MandateRelatedInformation() {
 		
 	}
         /*on recupere l'identifiant de mandat */
@@ -22,7 +22,7 @@ public class MndtRltdInf {
 	}
         
         /* les informations relatives au mandat*/
-	public MndtRltdInf(String identMnd, String dateSgntr) {
+	public MandateRelatedInformation(String identMnd, String dateSgntr) {
 		super();
 		MndtId = identMnd;
 		DtOfSgntr = dateSgntr;

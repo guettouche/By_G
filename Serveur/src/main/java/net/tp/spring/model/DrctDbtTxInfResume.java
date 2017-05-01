@@ -18,18 +18,16 @@ public class DrctDbtTxInfResume {
 	@XmlElement
 	String Date;
 	
-        
 	public DrctDbtTxInfResume(){
 		
 	}
 
-	public DrctDbtTxInfResume(String numero, String identifiant, double montant, String date) {
+	public DrctDbtTxInfResume(String num, String identifiant, double montant, String date) {
 		super();
-		
+		this.Num = num;
 		Identifiant = identifiant;
-		this.Num = numero;
-                this.Date = date;
-                this.Montant = montant;
+		this.Montant = montant;
+		this.Date = date;
 	}
 	
 }
