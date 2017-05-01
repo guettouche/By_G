@@ -44,7 +44,7 @@ public class TransactionController {
 			byte[] bytes = file.getBytes();
 			String trx = new String(bytes, StandardCharsets.UTF_8);
 			
-			Document d = postRequest("https://sepabank.herokuapp.com/depot/", trx);
+			Document d = postRequest("https://servicerestclientbyguettouche.herokuapp.com/depot/", trx);
 			if(d!=null){
 				model.addObject("response", d);
 			}else{
@@ -99,7 +99,7 @@ public class TransactionController {
 								"<RmtInf>"+request.getParameter("RmtInf")+"</RmtInf>"+
 							"</DrctDbtTxInf>");
 		
-		Document d = postRequest("https://sepabank.herokuapp.com/depot/", trx);
+		Document d = postRequest("https://servicerestclientbyguettouche.herokuapp.com/depot/", trx);
 		if(d!=null){
 			model.addObject("response", d);
 		}else{
@@ -116,7 +116,7 @@ public class TransactionController {
 	@RequestMapping(value="/resume", method = RequestMethod.GET)
 	public ModelAndView transactionResume(ModelAndView model) throws IOException, SAXException, ParserConfigurationException{
         
-		model.addObject("listTransactions", getRequest("https://sepabank.herokuapp.com/resume"));
+		model.addObject("listTransactions", getRequest("https://servicerestclientbyguettouche.herokuapp.com/resume"));
 		model.setViewName("transactionResume");
 		
 		return model;
@@ -127,7 +127,7 @@ public class TransactionController {
 	public ModelAndView searchTransaction(HttpServletRequest request, ModelAndView model) throws IOException, SAXException, ParserConfigurationException{
 		String id = new String(request.getParameter("identifiant"));
 		
-		Document d = getRequest("https://sepabank.herokuapp.com/trx/"+id.replace(" ", "%20"));
+		Document d = getRequest("https://servicerestclientbyguettouche.herokuapp.com/trx/"+id.replace(" ", "%20"));
 		
 		if(d!=null){
 			model.addObject("transaction",d);
@@ -145,7 +145,7 @@ public class TransactionController {
 	@RequestMapping(value="/stats", method = RequestMethod.GET)
 	public ModelAndView transactionStats(ModelAndView model) throws IOException, SAXException, ParserConfigurationException{
         
-		model.addObject("statistiques", getRequest("https://sepabank.herokuapp.com/stats"));
+		model.addObject("statistiques", getRequest("https://servicerestclientbyguettouche.herokuapp.com/stats"));
 		model.setViewName("transactionStats");
 		
 		return model;
@@ -154,7 +154,7 @@ public class TransactionController {
         @RequestMapping(value="/detail", method = RequestMethod.GET)
 	public ModelAndView transactionDetails(ModelAndView model) throws IOException, SAXException, ParserConfigurationException{
         
-		model.addObject("listTransactions", getRequest("https://sepabank.herokuapp.com/detail"));
+		model.addObject("listTransactions", getRequest("https://servicerestclientbyguettouche.herokuapp.com/detail"));
 		model.setViewName("transactionDetail");
 		
 		return model;
