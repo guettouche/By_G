@@ -1,7 +1,7 @@
  
- CREATE DATABASE sepadb;
+ CREATE DATABASE bddsepabygi;
  
- USE sepadb;
+ USE bddsepabygi;
  
  CREATE TABLE `transaction` (
   `transaction_id` int(11) NOT NULL AUTO_INCREMENT,

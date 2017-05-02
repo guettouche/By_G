@@ -31,7 +31,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	public DataSource getDataSource() {
 		DriverManagerDataSource DMD = new DriverManagerDataSource();
 		DMD.setDriverClassName("com.mysql.jdbc.Driver");
-		DMD.setUrl("jdbc:mysql://localhost:3306/sepa_by_gi");
+		DMD.setUrl("jdbc:mysql://localhost:3306/bddsepabygi");
 		DMD.setUsername("root");
 		DMD.setPassword("");
 		
